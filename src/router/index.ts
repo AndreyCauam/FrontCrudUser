@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home/index.vue'
-import CreateUser from '../views/User/CreateUpdateUser/index.vue'
-import UpdateUser from '../views/User/CreateUpdateUser/index.vue'
-import ShowUser from '../views/User/ShowUser/index.vue'
+import CreatePessoa from '../views/Pessoa/CreateUpdatePessoa/index.vue'
+import UpdatePessoa from '../views/Pessoa/CreateUpdatePessoa/index.vue'
+import ShowPessoa from '../views/Pessoa/ShowPessoa/index.vue'
 import Error from '../views/Error/index.vue'
 
 const router = createRouter({
@@ -14,19 +14,19 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/createUser',
-      name: 'CreateUser',
-      component: CreateUser
+      path: '/createPessoa',
+      name: 'CreatePessoa',
+      component: CreatePessoa
     },
     {
-      path: '/updateUser',
-      name: 'CreateUser',
-      component: UpdateUser
+      path: '/updatePessoa',
+      name: 'UpdatePessoa',
+      component: UpdatePessoa
     },
     {
-      path: '/showUser',
-      name: 'ShowUser',
-      component: ShowUser
+      path: '/showPessoa',
+      name: 'ShowPessoa',
+      component: ShowPessoa
     },
     {
       path: '/error',

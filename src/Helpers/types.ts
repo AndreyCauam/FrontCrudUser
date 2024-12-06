@@ -1,18 +1,18 @@
-export interface User {
-    id?: number;
-    name: string;
-    email: string;
-    birthdate: Date;
+export interface Pessoa {
+    id?: Number | null;
+    nome: String | null;
+    email: String | null;
+    data_de_nascimento: Date | null;
 }
 
 export interface Notification {
-    title: string;
-    message: string;
-    type: string;
+    title: String;
+    message: String;
+    type: String;
 }
 
-export interface Variable {
-    name: string;
-    email: string;
-    birthdate: Date;
+export interface Options {
+    search: String | null;
+    limit: Number;
+    offset: Number;
 }

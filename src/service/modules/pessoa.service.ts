@@ -1,7 +1,7 @@
 import { api } from '../api'
-import type {User} from '@/Helpers/types'
+import type {Options, Pessoa} from '@/helpers/types'
 
-export const createUser = async (data: User): Promise<User | undefined> => {
+export const createPessoa = async (data: Pessoa): Promise<Pessoa | undefined> => {
     try {
         const res = await api.post(`/pessoa`, data)
         return res.data
@@ -13,7 +13,7 @@ export const createUser = async (data: User): Promise<User | undefined> => {
     }
 }
 
-export const updateUser = async (id: number, data: User): Promise<User> => {
+export const updatePessoa = async (id: number, data: Pessoa): Promise<Pessoa> => {
     try {
         const res = await api.patch(`/pessoa/${id}`, data)
         return res.data
@@ -25,7 +25,7 @@ export const updateUser = async (id: number, data: User): Promise<User> => {
     }
 }
 
-export const showUser = async (id: number): Promise<User | undefined> => {
+export const showPessoa = async (id: number): Promise<Pessoa | undefined> => {
     try {
         const res = await api.get(`/pessoa/show/${id}`)
         return res.data
@@ -37,9 +37,9 @@ export const showUser = async (id: number): Promise<User | undefined> => {
     }
 }
 
-export const getAllUsers = async (): Promise<User[]> => {
+export const getAllPessoas = async (option: Options): Promise<Pessoa[]> => {
     try {
-        const res = await api.post(`/pessoas`)
+        const res = await api.get(`/pessoas`, {params: option})
         return res.data
     } catch (error) {
         if (error instanceof Error) {
@@ -49,7 +49,7 @@ export const getAllUsers = async (): Promise<User[]> => {
     }
 }
 
-export const deleteUser = async (id: number): Promise<void> => {
+export const deletePessoa = async (id: number): Promise<void> => {
     try {
         const res = await api.delete(`/pessoa/${id}`)
         return res.data
