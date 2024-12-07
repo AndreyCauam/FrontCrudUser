@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch } from 'vue';
+import { ref, reactive, computed, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import moment from 'moment';
 import type { Pessoa } from '@/helpers/types';
+import CardForm from '@/components/CardForm.vue';
+import gsap from 'gsap';
 
 import { usePessoaStore } from '@/stores/pessoa'
-import { useVuelidate } from "@vuelidate/core";
-import { required, email } from "@vuelidate/validators";
-import { useRouter } from "vue-router"
+import { useRouter, useRoute } from "vue-router"
+import { toast } from 'vue3-toastify';
+
 
 const form = reactive<Pessoa>({
   id: null,
@@ -17,53 +18,126 @@ const form = reactive<Pessoa>({
 })
 
 const router = useRouter()
+const route = useRoute()
 const pessoaStore = usePessoaStore()
-const { pessoas } = storeToRefs(pessoaStore)
+const { pessoa } = storeToRefs(pessoaStore)
+
+const loading = ref(false)
 
 const handleSubmit = async () => {
   try {
-
-    await pessoaStore.createPessoa(form);
-    router.push({ name: 'HomeList' });
+    if (route.params.id) {
+      await pessoaStore.updatePessoa(Number(route.params.id), form)
+      toast('Pessoa atualizada com sucesso')
+      router.push({ name: 'HomeList' })
+    }else{
+      await pessoaStore.createPessoa(form);
+      toast('Pessoa cadastrada com sucesso')
+      router.push({ name: 'HomeList' })
+    }
 
   } catch (error) {
     console.error('Erro ao salvar a pessoa:', error);
   }
 };
+
+watch(pessoa,(newValue) => {
+  Object.assign(form, newValue)
+})
+
+watch(
+  () =>form.nome,(newValue) => {
+  if(newValue){
+    gsap.to('#nome', {
+      duration: 1,
+      textDecoration: "line-through",
+      delay: 1 * 0.2, 
+    });
+  }else{
+    gsap.to('#nome', {
+      duration: 1,
+      textDecoration: "none",
+      delay: 1 * 0.2, 
+    });
+  }
+})
+
+watch(
+  () =>form.email,(newValue) => {
+  if(newValue){
+    gsap.to('#email', {
+      duration: 2,
+      textDecoration: "line-through",
+      delay: 2 * 0.2, 
+    });
+  }else{
+    gsap.to('#email', {
+      duration: 1,
+      textDecoration: "none",
+      delay: 1 * 0.2, 
+    });
+  }
+})
+
+watch(
+  () =>form.data_de_nascimento,(newValue) => {
+  if(newValue){
+    gsap.to('#data_de_nascimento', {
+      duration: 2,
+      textDecoration: "line-through",
+      delay: 2 * 0.2, 
+    });
+  }else{
+    gsap.to('#data_de_nascimento', {
+      duration: 1,
+      textDecoration: "none",
+      delay: 1 * 0.2, 
+    });
+  }
+})
+
+onMounted( async () => {
+  try {
+    if(route.params.id){
+      loading.value = true
+      await pessoaStore.showPessoa(Number(route.params.id))
+      loading.value = false
+    }
+  } catch (error) {
+    return error
+  }
+})
 </script>
 
 <template>
-
   <div class="Container">
     <div class="row">
       <div class="col-6 d-flex align-items-center">
-        <form @submit.prevent="handleSubmit">
-          <div class="row mb-2">
-            <div class="col-12">
-              <label for="exampleFormControlInput1" class="form-label">Nome</label>
-              <input v-model="form.nome" type="text" class="form-control" id="nome" name="nome" placeholder="Digite um nome">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <label for="exampleFormControlInput1" class="form-label">Email</label>
-              <input v-model="form.email" type="email" class="form-control" id="email" name="email" placeholder="Digite um email">
-            </div>
-            <div class="col-6">
-              <label for="exampleFormControlInput1" class="form-label">Data de nascimento</label>
-              <input v-model="form.data_de_nascimento" type="date" class="form-control" id="data-de-nascimento" name="data-de-nascimento" placeholder="">
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-12 text-end">
-              <button type="button" @click="router.push({name: 'HomeList'})" class="btn btn-secondary me-2">Voltar</button>
-              <button type="submit" class="btn btn-primary" >Salvar</button>
-            </div>
-          </div>
-        </form>
+        <CardForm v-if="!loading" v-model:formData="form" v-model:date="form.data_de_nascimento" @submit="handleSubmit" @close="router.go(-1)"/>
+        <div v-else>
+          <p class="card-text placeholder-glow">
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-6"></span>
+          </p>
+        </div>
       </div>
       <div class="col-6 d-flex align-items-center">
-
+        <div class="clipboard">
+          <div class="sheet">
+                <div>
+                    <h3>Cadastro de pessoa</h3>
+                </div>
+                <ol>
+                    <li id="nome">Nome</li>
+                    <li id="email">Email</li>
+                    <li id="data_de_nascimento">Data de nascimento</li>
+                </ol>
+            </div>
+        </div>
       </div>
     </div>
   </div>
@@ -71,5 +145,18 @@ const handleSubmit = async () => {
 </template>
 
 <style scoped>
-
+.clipboard{
+    width: 100%;
+    height: 600px;
+    background: #784008;
+    border-radius: 20px;
+    padding: 20px;
+}
+.sheet{
+    color: #000;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 40px;
+}
 </style>

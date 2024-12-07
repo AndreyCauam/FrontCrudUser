@@ -19,7 +19,7 @@ const router = createRouter({
       component: CreatePessoa
     },
     {
-      path: '/updatePessoa',
+      path: '/updatePessoa/:id',
       name: 'UpdatePessoa',
       component: UpdatePessoa
     },

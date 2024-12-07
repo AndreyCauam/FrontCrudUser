@@ -27,7 +27,7 @@ export const usePessoaStore = defineStore({
     },
 
 
-    async updatePessoa(id: number, data: Pessoa) {
+    async updatePessoa(id: Number, data: Pessoa) {
       try {
         const updatedPessoa = await updatePessoa(id, data);
         if (updatedPessoa) {
@@ -42,12 +42,10 @@ export const usePessoaStore = defineStore({
     },
 
 
-    async showPessoa(id: number) {
+    async showPessoa(id: Number) {
       try {
-        const pessoa = await showPessoa(id);
-        if (pessoa) {
-          this.pessoa = pessoa;
-        }
+        const {pessoa} = await showPessoa(id);
+        this.pessoa = pessoa
       } catch (error) {
         console.error('Erro ao buscar pessoa:', error);
       }
@@ -64,7 +62,7 @@ export const usePessoaStore = defineStore({
       }
     },
 
-    async deletePessoa(id: number) {
+    async deletePessoa(id: Number) {
       try {
         await deletePessoa(id);
         this.pessoas = this.pessoas.filter((pessoa) => pessoa.id !== id);

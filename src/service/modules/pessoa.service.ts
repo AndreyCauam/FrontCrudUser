@@ -13,9 +13,9 @@ export const createPessoa = async (data: Pessoa): Promise<Pessoa | undefined> =>
     }
 }
 
-export const updatePessoa = async (id: number, data: Pessoa): Promise<Pessoa> => {
+export const updatePessoa = async (id: Number, data: Pessoa): Promise<Pessoa> => {
     try {
-        const res = await api.patch(`/pessoa/${id}`, data)
+        const res = await api.put(`/pessoa/${id}`, data)
         return res.data
     } catch (error) {
         if (error instanceof Error) {
@@ -25,9 +25,9 @@ export const updatePessoa = async (id: number, data: Pessoa): Promise<Pessoa> =>
     }
 }
 
-export const showPessoa = async (id: number): Promise<Pessoa | undefined> => {
+export const showPessoa = async (id: Number): Promise<Pessoa | undefined> => {
     try {
-        const res = await api.get(`/pessoa/show/${id}`)
+        const res = await api.get(`/pessoa/${id}`)
         return res.data
     } catch (error) {
         if (error instanceof Error) {
@@ -49,7 +49,7 @@ export const getAllPessoas = async (option: Options): Promise<Pessoa[]> => {
     }
 }
 
-export const deletePessoa = async (id: number): Promise<void> => {
+export const deletePessoa = async (id: Number): Promise<void> => {
     try {
         const res = await api.delete(`/pessoa/${id}`)
         return res.data
