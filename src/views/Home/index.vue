@@ -50,7 +50,7 @@ onMounted(() => {
   <div class="Container">
     <div class="row">
         <div class="col-12 text-end ">
-            <button type="button" @click="router.push({name: 'CreatePessoa'})" class="btn btn-primary">Adicionar pessoa</button>
+            <button type="button" @click="router.push({name: 'CreatePessoa'})" id="add-pessoa" class="btn btn-primary">Adicionar pessoa</button>
         </div>
     </div>
     <div class="row mt-4">
@@ -75,8 +75,8 @@ onMounted(() => {
                                 <td>{{moment(pessoa.data_de_nascimento).format('DD/MM/YYYY')}}</td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        <button type="button" @click="router.push({name: 'UpdatePessoa', params:{id:pessoa.id}})" class="btn btn-primary"><i class="bi-pencil-square"></i></button>
-                                        <button type="button" @click="deletePessoa(pessoa)" class="btn btn-danger"><i class="bi-trash"></i></button>
+                                        <button type="button" @click="router.push({name: 'UpdatePessoa', params:{id:pessoa.id}})" id="edit-pessoa" class="btn btn-primary"><i class="bi-pencil-square"></i></button>
+                                        <button type="button" @click="deletePessoa(pessoa)" id="delete-pessoa" class="btn btn-danger"><i class="bi-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -97,7 +97,7 @@ onMounted(() => {
             <ModalConfirm :show="modalVisible">
                 <template #body>Tem certeza que seja delete {{dataModal?.nome}}? Essa ação não poderá ser revertida.</template>
                 <template #footer>
-                    <button class="btn btn-primary" @click="confirmDelete(dataModal?.id)">Tenho certeza que quero deletar {{dataModal?.nome}}</button>
+                    <button class="btn btn-primary" id="delete-confirm" @click="confirmDelete(dataModal?.id)">Tenho certeza que quero deletar {{dataModal?.nome}}</button>
                 </template>
             </ModalConfirm>   
         </div>

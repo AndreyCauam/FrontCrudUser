@@ -69,6 +69,7 @@ watch(dateFormat, () => {
               <div class="col-12">
                 <label for="exampleFormControlInput1" class="form-label">Nome</label>
                 <input
+                  id="form-nome"
                   v-model="form.nome"
                   type="text"
                   class="form-control"
@@ -86,6 +87,7 @@ watch(dateFormat, () => {
               <div class="col-6">
                 <label for="email" class="form-label">Email</label>
                 <input
+                  id="form-email"
                   v-model="form.email"
                   type="email"
                   class="form-control"
@@ -102,6 +104,7 @@ watch(dateFormat, () => {
               <div class="col-6">
                 <label for="data-de-nascimento" class="form-label">Data de Nascimento</label>
                 <input
+                  id="form-data"
                   v-model="form.data_de_nascimento"
                   type="date"
                   class="form-control"
@@ -116,8 +119,8 @@ watch(dateFormat, () => {
             </div> 
             <div class="row mt-4">
               <div class="col-12 text-end">
-                <button type="button" @click="emit('close')" class="btn btn-secondary me-2">Voltar</button>
-                <button type="submit" class="btn btn-primary" >Salvar</button>
+                <button type="button" @click="emit('close')" id="back-home" class="btn btn-secondary me-2">Voltar</button>
+                <button type="submit" class="btn btn-primary" id="submit-pessoa" >Salvar</button>
               </div>
             </div>
         </form>

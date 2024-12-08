@@ -1,55 +1,58 @@
 # FrontCrudUser
 
-This template should help get you started developing with Vue 3 in Vite.
+Está é uma aplicação frontend desenvolida em Vue, é uma aplicação de gerenciamento de pessoas.
 
-## Recommended IDE Setup
+## Tecnologias utilizadas
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue3 com TypeScript
+- Bootstrap
+- Axios
+- Gsap
+- Pinia
+- Moment
+- Vue3-toastify
+- Vuelidate
 
-## Type Support for `.vue` Imports in TS
+## Instalação
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Como pré-requisto é necessário ter o Node.js instalado e ter a url da api no .env. Você pode utilizar está url padrão
 
-## Customize configuration
+```sh
+VITE_BASE_API_URL=http://localhost:8080
+```  
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Etapas
 
-## Project Setup
+#### 1- Instale as dependências rodando o comando:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+#### 2- Inicie o front-end
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+#### 3- Acesse a aplicação
 
-```sh
-npm run build
-```
+Para acessar a aplicação o link é http://localhost:5173
 
-### Run Headed Component Tests with [Cypress Component Testing](https://on.cypress.io/component)
+## Testes
 
-```sh
-npm run test:unit:dev # or `npm run test:unit` for headless testing
-```
+Para o teste foi utilizado a tecnologia Cypress.
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+#### Inicie o teste
+
+Para inicia-lo é necessário rodar o comando:
 
 ```sh
 npm run test:e2e:dev
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+Após inicia-lo clique no botão
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+- Start E2E Testing in Chrome
 
-```sh
-npm run build
-npm run test:e2e
-```
+Em seguida clique no arquivo *crudBasic.cy.ts* e os testes irão iniciar
