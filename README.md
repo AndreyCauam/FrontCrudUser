@@ -1,6 +1,6 @@
 # FrontCrudUser
 
-Está é uma aplicação frontend desenvolida em Vue, é uma aplicação de gerenciamento de pessoas.
+Está é uma aplicação frontend desenvolvida em Vue, é uma aplicação de gerenciamento de pessoas.
 
 ## Tecnologias utilizadas
 
